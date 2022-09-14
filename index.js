@@ -35,7 +35,7 @@ app.get('/records', function(req, res){
   }
   argString = argString.slice(0,-1);
   console.log(argString);
-  
+  console.log('here');
   fetch('https://api.collegefootballdata.com/records'+argString,{
     headers:{
       accept: 'application/json',
