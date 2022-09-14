@@ -43,11 +43,7 @@ app.get('/records', function(req, res){
     }
   })
   .then(response => {
-    if (response.status===200){
-   return response.json()}
-  else{
-   return response.text()
-  }})
+       return response.json()})
   .then(data => {
     //console.log(data);
     res.json(data)
