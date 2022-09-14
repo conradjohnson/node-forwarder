@@ -5,6 +5,7 @@ const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const app = express();
 const PORT = process.env.PORT || 3001;
+const fs = require("fs")
 
 
 app.use(cors({origin: '*'}));
@@ -45,6 +46,20 @@ app.get('/records', function(req, res){
   .then(data => {
     //console.log(data);
     res.json(data)
+  })
+  .catch(err => {
+
+
+    fs.appendFile("./log.txt", JSON.stringify(err), function(err){
+
+
+        if(err)
+        {
+          console.log(err)
+        }
+    })
+      res.json(err.message)
+
   })
 })
 
