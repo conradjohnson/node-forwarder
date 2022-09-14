@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 
-app.use(cors({origin: /\.herokuapp\.com$/}));
+app.use(cors({origin: '*'}));
 app.get('/records', function(req, res){
   // req.query
   let urlArgs = req.query;
