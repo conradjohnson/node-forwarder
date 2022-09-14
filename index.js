@@ -1,19 +1,21 @@
+
+// NodeJs program for proxy forwarding.
+
+// package variables
 let cors = require('cors');
 require('dotenv').config();
 const fetch = require('node-fetch');
 const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+
+// global variables
 const app = express();
 const PORT = process.env.PORT || 3001;
 const fs = require("fs")
 
-
+// configure cors pass through
 app.use(cors({origin: '*'}));
 
-
-
-
-// records endpoint.
+// omni endpoint that passes arguments and authorization to CFD API
 app.get('/:endpoint', function(req, res){
   let urlArgs = req.query;
   let argString = "?";
@@ -46,15 +48,6 @@ app.get('/:endpoint', function(req, res){
   })
 })
 
+//start listenint for incoming requests
 app.listen(PORT);
 
-// app.use('/api', createProxyMiddleware({ 
-//     target: 'api.collegefootballdata.com/records', changeOrigin: true,  logger: console
-// }));
-
-
-
-//headers: { 
-  //  'Access-Control-Allow-Origin' : '*',
-   // 'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-//  },
