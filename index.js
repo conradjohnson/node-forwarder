@@ -42,7 +42,12 @@ app.get('/records', function(req, res){
       Authorization: process.env.BEARER
     }
   })
-  .then(response => response.json())
+  .then(response => {
+    if (response.status==200){
+    response.json()}
+  else{
+    response.text()
+  }})
   .then(data => {
     //console.log(data);
     res.json(data)
