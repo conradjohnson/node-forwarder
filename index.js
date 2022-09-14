@@ -43,10 +43,10 @@ app.get('/records', function(req, res){
     }
   })
   .then(response => {
-    if (response.status==200){
-    response.json()}
+    if (response.status===200){
+   return response.json()}
   else{
-    response.text()
+   return response.text()
   }})
   .then(data => {
     //console.log(data);
