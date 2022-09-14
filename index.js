@@ -10,24 +10,11 @@ const fs = require("fs")
 
 app.use(cors({origin: '*'}));
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*")
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested, Content-Type, Accept Authorization"
-//   )
-//   if (req.method === "OPTIONS") {
-//     res.header(
-//       "Access-Control-Allow-Methods",
-//       "POST, PUT, PATCH, GET, DELETE"
-//     )
-//     return res.status(200).json({})
-//   }
-//   next()
-// })
 
-app.get('/records', function(req, res){
-  // req.query
+
+
+// records endpoint.
+app.get('/:endpoint', function(req, res){
   let urlArgs = req.query;
   let argString = "?";
   for (let i=0; i<Object.keys(urlArgs).length; i++){
@@ -36,7 +23,7 @@ app.get('/records', function(req, res){
   argString = argString.slice(0,-1);
   console.log(argString);
   console.log('here');
-  fetch('https://api.collegefootballdata.com/records'+argString,{
+  fetch('https://api.collegefootballdata.com/'+req.params.endpoint+argString,{
     headers:{
       accept: 'application/json',
       Authorization: `Bearer ${process.env.BEARER}`
@@ -49,19 +36,13 @@ app.get('/records', function(req, res){
     res.json(data)
   })
   .catch(err => {
-
-    
-
     fs.appendFile("./log.txt", JSON.stringify(err), function(err){
-
-
         if(err)
         {
           console.log(err)
         }
     })
       res.json(err.message)
-
   })
 })
 
