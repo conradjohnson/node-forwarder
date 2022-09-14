@@ -39,7 +39,7 @@ app.get('/records', function(req, res){
   fetch('https://api.collegefootballdata.com/records'+argString,{
     headers:{
       accept: 'application/json',
-      Authorization: process.env.BEARER
+      Authorization: `Bearer ${process.env.BEARER}`
     }
   })
   .then(response => {
