@@ -50,6 +50,7 @@ app.get('/records', function(req, res){
   })
   .catch(err => {
 
+    
 
     fs.appendFile("./log.txt", JSON.stringify(err), function(err){
 
